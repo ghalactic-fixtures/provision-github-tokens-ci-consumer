@@ -1,5 +1,5 @@
-# GitHub Credential Rotation Target Fixture
+# Provision GitHub Tokens Target Fixture
 
-A fixture repo for testing [ghalactic/github-credential-rotation-action].
+A fixture repo for testing [ghalactic/provision-github-tokens].
 
-[ghalactic/github-credential-rotation-action]: https://github.com/ghalactic/github-credential-rotation-action
+[ghalactic/provision-github-tokens]: https://github.com/ghalactic/provision-github-tokens
