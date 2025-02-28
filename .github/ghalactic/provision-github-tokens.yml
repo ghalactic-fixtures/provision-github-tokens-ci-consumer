@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://ghalactic.github.io/provision-github-tokens/schema/consumer.v1.schema.json
+
+tokens:
+  readMetadata:
+    repos:
+      - provision-github-tokens-ci-consumer
+      - provision-github-tokens-ci-provider
+    permissions:
+      metadata: read
+
+provision:
+  secrets:
+    READ_METADATA_TOKEN:
+      token: readMetadata
+      github:
+        repo:
+          actions: true
