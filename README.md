@@ -1,4 +1,4 @@
-# Provision GitHub Tokens Target Fixture
+# Provision GitHub Tokens CI Consumer Fixture
 
 A fixture repo for testing [ghalactic/provision-github-tokens].
 
