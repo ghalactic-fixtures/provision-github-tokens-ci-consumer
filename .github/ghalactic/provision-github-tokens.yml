@@ -15,3 +15,4 @@ provision:
       github:
         repo:
           actions: true
+          environments: ["*"]
