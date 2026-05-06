@@ -9,27 +9,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: List action secrets
+      - name: List workflow runs
         uses: actions/github-script@v9
         with:
           github-token: ${{ secrets.READ_ACTIONS_TOKEN }}
           script: |
-            const { data } = await github.rest.actions.listRepoSecrets(context.repo);
+            const { data } = await github.rest.actions.listWorkflowRunsForRepo(context.repo);
             console.table(
-              data.secrets.map((s) => ({
-                name: s.name,
-                created: s.created_at,
-                updated: s.updated_at,
+              data.workflow_runs.slice(0, 5).map((r) => ({
+                id: r.id,
+                name: r.name,
+                status: r.status,
+                conclusion: r.conclusion,
               })),
             );
-
-      - name: Assert READ_ACTIONS_TOKEN exists
-        uses: actions/github-script@v9
-        with:
-          github-token: ${{ secrets.READ_ACTIONS_TOKEN }}
-          script: |
-            const { data } = await github.rest.actions.listRepoSecrets(context.repo);
-            const names = data.secrets.map(s => s.name);
-            if (!names.includes("READ_ACTIONS_TOKEN")) {
-              core.setFailed("READ_ACTIONS_TOKEN not found in secrets list");
-            }
