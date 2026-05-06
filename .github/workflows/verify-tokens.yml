@@ -1,7 +1,12 @@
 name: Verify tokens
+run-name: "Verify tokens: ${{ inputs.label }}"
 
 on:
   workflow_dispatch:
+    inputs:
+      label:
+        description: Human-readable label for this run
+        type: string
 
 jobs:
   verify:
