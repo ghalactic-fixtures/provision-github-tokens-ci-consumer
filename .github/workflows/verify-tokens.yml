@@ -1,0 +1,35 @@
+name: Verify tokens
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Verify tokens
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: List action secrets
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ secrets.READ_ACTIONS_TOKEN }}
+          script: |
+            const { data } = await github.rest.actions.listRepoSecrets(context.repo);
+            console.table(
+              data.secrets.map((s) => ({
+                name: s.name,
+                created: s.created_at,
+                updated: s.updated_at,
+              })),
+            );
+
+      - name: Assert READ_ACTIONS_TOKEN exists
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ secrets.READ_ACTIONS_TOKEN }}
+          script: |
+            const { data } = await github.rest.actions.listRepoSecrets(context.repo);
+            const names = data.secrets.map(s => s.name);
+            if (!names.includes("READ_ACTIONS_TOKEN")) {
+              core.setFailed("READ_ACTIONS_TOKEN not found in secrets list");
+            }
