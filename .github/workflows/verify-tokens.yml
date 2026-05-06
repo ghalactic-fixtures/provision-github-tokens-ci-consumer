@@ -9,17 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: List workflow runs
+      - name: List action secrets
         uses: actions/github-script@v9
         with:
-          github-token: ${{ secrets.READ_ACTIONS_TOKEN }}
+          github-token: ${{ secrets.READ_SECRETS_TOKEN }}
           script: |
-            const { data } = await github.rest.actions.listWorkflowRunsForRepo(context.repo);
+            const { data } = await github.rest.actions.listRepoSecrets(context.repo);
             console.table(
-              data.workflow_runs.slice(0, 5).map((r) => ({
-                id: r.id,
-                name: r.name,
-                status: r.status,
-                conclusion: r.conclusion,
+              data.secrets.map((s) => ({
+                name: s.name,
+                created: s.created_at,
+                updated: s.updated_at,
               })),
             );

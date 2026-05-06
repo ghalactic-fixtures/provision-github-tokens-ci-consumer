@@ -10,7 +10,7 @@ tokens:
     repos:
       - provision-github-tokens-ci-consumer
     permissions:
-      actions: read
+      secrets: read
   unauthorizedToken:
     repos:
       - provision-github-tokens-ci-consumer
@@ -25,7 +25,7 @@ provision:
         repo:
           actions: true
           environments: ["*"]
-    READ_ACTIONS_TOKEN:
+    READ_SECRETS_TOKEN:
       token: readActions
       github:
         repo:
