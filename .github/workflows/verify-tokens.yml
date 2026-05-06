@@ -1,5 +1,5 @@
 name: Verify tokens
-run-name: "Verify tokens: ${{ inputs.label }}"
+run-name: Verify tokens (${{ inputs.label }})
 
 on:
   workflow_dispatch:
